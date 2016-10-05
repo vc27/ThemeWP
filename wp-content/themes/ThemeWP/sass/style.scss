@@ -1,0 +1,126 @@
+/* style.css
+#################################################################################################### */
+// $global-flexbox: true !global;
+
+@import 'foundation_settings';
+@import '../node_modules/foundation-sites/scss/foundation';
+
+@include foundation-everything();
+
+@import 'mixins';
+@import 'defaults';
+
+.a, a, a:visited {
+	cursor: pointer;
+	text-decoration: none;
+}
+.em {
+	font-style: italic;
+}
+.featured-image {
+	@include featured-image();
+}
+.text-medium {
+	font-size: 18px;
+}
+.text-small {
+	font-size: 14px;
+}
+.text-small-ex {
+	font-size: 12px;
+}
+.primary {
+	color:$primary-color;
+}
+.text-upper {
+	text-transform:uppercase;
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {}
+
+.h1, h1 {
+	font-size:48px;
+}
+.h2, h2 {
+	font-size:40px;
+}
+.h3, h3 {
+	font-size:30px;
+}
+.h4, h4 {
+	font-size:28px;
+}
+.h5, h5 {
+	font-size:20px;
+}
+.h6, h6 {
+	font-size:16px;
+}
+
+.img-wrap {
+	@include inline-block();
+	img {
+		@include image-auto-width();
+	}
+}
+.img-wrap.bg-img {
+	display:block;
+	width:100%;
+	height:100%;
+	@include background-cover();
+}
+.border {
+	border: solid 1px $black;
+}
+.border.thick {
+	border-width: 10px;
+}
+.border.medium {
+	border-width: 5px;
+}
+.border.medium-gray {
+	border-color:$medium-gray;
+}
+.border.dark-gray {
+	border-color:$dark-gray;
+}
+
+.round {
+	@include border-radius(8px);
+}
+
+/* Buttons
+#################################################################################################### */
+
+.button.round {
+	@include border-radius(8px);
+}
+.button.thin {
+	padding-top:7px;
+	padding-bottom:7px;
+}
+.button.wide {
+	padding-left:30px;
+	padding-right:30px;
+}
+
+/* Forms
+#################################################################################################### */
+/* remove webkit css
+select, input, textarea {
+	-webkit-appearance: none;
+	-moz-appearance:window;
+}
+select::-ms-expand {
+    display: none;
+}
+
+::-webkit-input-placeholder {}
+:-moz-placeholder {}
+::-moz-placeholder {}
+:-ms-input-placeholder {}
+*/
+/* Includes
+#################################################################################################### */
+@import 'layouts';
+@import 'sections';
+@import 'comments';
