@@ -12,6 +12,10 @@ Specs and tasks
 ChangeLog
 ====================
 
+### 10.06.16 - v-9.0.1
+- move readme.md to root and remove change-log.md
+- use readme.md so github can recognize it as the primary info page
+
 ### 10.06.16 - v-9.0.0
 - hm looks like a large portion of the commit log was removed :(
 - reseting the version to 9.0 to create a new base.
