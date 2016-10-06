@@ -3,12 +3,22 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		watch: {
 			css: {
-				files: '**/*.scss',
-				tasks: ['sass', 'notify:sass']
+				files: [
+					'scss/*.scss'
+				],
+				tasks: [
+					'sass',
+					'notify:sass'
+				]
 			},
 			scripts: {
-				files: ['**/*.js'],
-				tasks: ['uglify', 'notify:uglify']
+				files: [
+					'js/childTheme.js'
+				],
+				tasks: [
+					'uglify',
+					'notify:uglify'
+				]
 			}
 		},
 		sass: {
@@ -41,12 +51,12 @@ module.exports = function(grunt) {
 					src: [
 						"css/style.css",
 						"**/*.php",
-						"**/*.js",
+						"js/*.js",
 					]
 				},
 				options: {
 					watchTask: true,
-					proxy: "parenttheme.v1"
+					proxy: "themewp.com"
 				}
 			}
 		},

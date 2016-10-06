@@ -12,6 +12,13 @@ Specs and tasks
 ChangeLog
 ====================
 
+### 10.06.16 - v-9.0.0
+- hm looks like a large portion of the commit log was removed :(
+- reseting the version to 9.0 to create a new base.
+- update grunt file with proper watch settings
+- update package.json to include foundations
+- rename sass to scss
+
 ### 03.23.16 - v-8.0.2 randy-c-5.0
 - move style.css to /css and leave style.css in root for theme info
 
