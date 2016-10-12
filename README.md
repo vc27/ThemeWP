@@ -12,6 +12,10 @@ Specs and tasks
 ChangeLog
 ====================
 
+### 10.06.16 - v-9.0.2
+- update gitignore to be more general in it's ignore statements
+- utilize ! to keep folders and files
+
 ### 10.06.16 - v-9.0.1
 - move readme.md to root and remove change-log.md
 - use readme.md so github can recognize it as the primary info page
