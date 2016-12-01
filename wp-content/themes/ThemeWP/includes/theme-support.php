@@ -27,13 +27,13 @@ function get__option( $option ) {
 /**
  * is__user
  **/
-function is__user( $user_login = false ) {
+function is__user( $user_login = [] ) {
 	$userdata = wp_get_current_user();
 
 	if (
 		$user_login
 		AND isset( $userdata->data->user_login )
-		AND $userdata->data->user_login == $user_login
+		AND in_array( $userdata->data->user_login, $user_login )
 	) {
 		return true;
 	} else {

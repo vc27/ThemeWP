@@ -7,34 +7,32 @@
 
 @include foundation-everything();
 
-@import 'mixins';
-@import 'defaults';
+@import 'mixins-defaults';
+@import 'reset-type-defaults';
+@import 'class-defaults';
 
-.a, a, a:visited {
-	cursor: pointer;
-	text-decoration: none;
+/* Headers
+#################################################################################################### */
+
+.h1 {
+	@extend h1;
 }
-.em {
-	font-style: italic;
+.h2 {
+	@extend h2;
 }
-.featured-image {
-	@include featured-image();
+.h3 {
+	@extend h3;
 }
-.text-medium {
-	font-size: 18px;
+.h4 {
+	@extend h4;
 }
-.text-small {
-	font-size: 14px;
+.h5 {
+	@extend h4;
 }
-.text-small-ex {
-	font-size: 12px;
+.h6 {
+	@extend h6;
 }
-.primary {
-	color:$primary-color;
-}
-.text-upper {
-	text-transform:uppercase;
-}
+
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {}
 
 .h1, h1 {
@@ -56,41 +54,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {}
 	font-size:16px;
 }
 
-.img-wrap {
-	@include inline-block();
-	img {
-		@include image-auto-width();
-	}
-}
-.img-wrap.bg-img {
-	display:block;
-	width:100%;
-	height:100%;
-	@include background-cover();
-}
-.border {
-	border: solid 1px $black;
-}
-.border.thick {
-	border-width: 10px;
-}
-.border.medium {
-	border-width: 5px;
-}
-.border.medium-gray {
-	border-color:$medium-gray;
-}
-.border.dark-gray {
-	border-color:$dark-gray;
-}
-
-.round {
-	@include border-radius(8px);
-}
-
 /* Buttons
 #################################################################################################### */
 
+button,
+input[type="button"],
+input[type="submit"] {
+	@extend .button;
+}
 .button.round {
 	@include border-radius(8px);
 }
@@ -119,8 +90,9 @@ select::-ms-expand {
 ::-moz-placeholder {}
 :-ms-input-placeholder {}
 */
+
 /* Includes
 #################################################################################################### */
-@import 'layouts';
-@import 'sections';
+@import 'layouts-theme-specific';
+@import 'ids';
 @import 'comments';

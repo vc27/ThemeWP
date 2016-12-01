@@ -6,11 +6,15 @@ Specs and tasks
 - NEEDS_UPDATE
 - CURRENTLY_WORKING_ON
 
-- Version = v-[major-release].[minor-release].[bug-fix]
-- Commit = randy-c-[commit-count].[commit-session]
-
 ChangeLog
 ====================
+
+### 12.01.16 - v-9.1.0
+- update gitignore
+- update sass include structure and file naming
+- remove foundations js as default
+- update addons to initiate classes in the initiate-addons.php file
+- update is_user to allow for an array
 
 ### 10.06.16 - v-9.0.2
 - update gitignore to be more general in it's ignore statements

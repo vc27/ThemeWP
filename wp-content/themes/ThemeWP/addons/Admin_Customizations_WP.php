@@ -1,10 +1,8 @@
 <?php
 /**
- * File Name Admin_Customizations_WP.php
- * @subpackage ProjectName
- *
- * @version 1.0
- * @updated 00.00.00
+ * add customizations to the wp admin to hide
+ * menu items for users and remove powerful plugin
+ * tools
  **/
 ####################################################################################################
 
@@ -15,9 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Admin_Customizations_WP
+ *
+ * add customizations to the wp admin to hide
+ * menu items for users and remove powerful plugin
+ * tools
  **/
-$Admin_Customizations_WP = new Admin_Customizations_WP();
-$Admin_Customizations_WP->init();
 class Admin_Customizations_WP {
 
 

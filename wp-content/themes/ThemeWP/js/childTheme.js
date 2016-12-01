@@ -35,5 +35,5 @@ var childTheme = {
 /**
  * jQuery
  **/
- jQuery(document).foundation();
+ // needs to be added to gruntfile.js jQuery(document).foundation();
  jQuery(document).ready(function() { childTheme.init(); });

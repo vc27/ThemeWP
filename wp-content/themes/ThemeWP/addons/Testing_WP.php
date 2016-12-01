@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * Testing_WP
  * @since 1.0
  **/
-new Testing_WP();
 class Testing_WP {
 
 	/**

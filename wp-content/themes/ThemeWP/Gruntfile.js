@@ -39,7 +39,7 @@ module.exports = function(grunt) {
 			my_target: {
 				files: {
 					'js/siteScripts.js': [
-						'node_modules/foundation-sites/dist/foundation.js',
+						// 'node_modules/foundation-sites/dist/foundation.js',
 						'js/childTheme.js'
 					]
 				}
@@ -51,12 +51,12 @@ module.exports = function(grunt) {
 					src: [
 						"css/style.css",
 						"**/*.php",
-						"js/*.js",
+						"js/siteScripts.js",
 					]
 				},
 				options: {
 					watchTask: true,
-					proxy: "themewp.com"
+					proxy: "http://themewp.com/"
 				}
 			}
 		},

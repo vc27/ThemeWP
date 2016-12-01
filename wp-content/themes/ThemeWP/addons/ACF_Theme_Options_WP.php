@@ -13,9 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * ACF_Theme_Options_WP
  **/
-$ACF_Theme_Options_WP = new ACF_Theme_Options_WP();
-$ACF_Theme_Options_WP->init();
 class ACF_Theme_Options_WP {
+
+
+	/**
+	 * users_allowed_to_manage_acf
+	 *
+	 * @access public
+	 * @var array
+	 **/
+	private $users_allowed_to_manage_acf = [];
 
 
 	/**
@@ -24,6 +31,18 @@ class ACF_Theme_Options_WP {
 	function __construct() {
 
 	} // end function __construct
+
+
+	/**
+	 * set
+	 **/
+	function set( $key, $val = false ) {
+
+		if ( isset( $key ) AND ! empty( $key ) ) {
+			$this->$key = $val;
+		}
+
+	} // end function set
 
 
 	/**
@@ -75,7 +94,7 @@ class ACF_Theme_Options_WP {
 	function remove_mene_page() {
 
 		if (
-			! is__user('randy')
+			! is__user( $this->users_allowed_to_manage_acf )
 		) {
 			remove_menu_page( 'edit.php?post_type=acf' );
 			remove_menu_page( 'edit.php?post_type=acf-field-group' );

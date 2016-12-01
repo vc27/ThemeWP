@@ -12,8 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Shortcodes_WP
  **/
-$Shortcodes_WP = new Shortcodes_WP();
-$Shortcodes_WP->init();
 class Shortcodes_WP {
 
 	/**

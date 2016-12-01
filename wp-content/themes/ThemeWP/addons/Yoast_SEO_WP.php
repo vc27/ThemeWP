@@ -10,13 +10,14 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
+// wpseo funciton needs to exist to continue
+if ( ! function_exists( 'wpseo_admin_bar_menu' ) ) { return; }
+
 
 /**
  * Yoast_SEO_WP
  * @since 1.0
  **/
-$Yoast_SEO_WP = new Yoast_SEO_WP();
-$Yoast_SEO_WP->init();
 class Yoast_SEO_WP {
 
 

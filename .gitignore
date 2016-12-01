@@ -1,17 +1,13 @@
-# Various
 *~
 .DS_Store
-.htaccess
 .svn
 .cvs
 *.bak
 *.swp
 Thumbs.db
-robots.txt
-logs
-
-# wordpress
-/wp-*
+node_modules
+.htaccess
+.sass-cache
 
 # wpengine specific
 .smushit-status
@@ -19,16 +15,47 @@ logs
 _wpeprivate
 
 # wp core (as of 3.4.1)
-/db-config.php
 /index.php
 /license.txt
 /readme.html
+/README.md
+/robots.txt
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-config.php
+/wp-content
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
 /xmlrpc.php
 
-# keep
-!/wp-content/themes/ThemeWP
+/wp-admin
+/wp-includes
 
-/wp-content/themes/ThemeWP/node_modules
+/wp-content/index.php
+/wp-content/uploads/
+/wp-content/blogs.dir/
+/wp-content/upgrade/*
+/wp-content/backup-db/*
+/wp-content/advanced-cache.php
+/wp-content/wp-cache-config.php
+/wp-content/cache/*
+/wp-content/cache/supercache/*
+/wp-content/object-cache.php
+/wp-content/mysql.sql
+/wp-content/mu-plugins/*
+/wp-content/themes/*
+/wp-content/plugins/*
+
+# Root specific
+/logs
 
 # large/disallowed file types
 # a CDN should be used for these
