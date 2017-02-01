@@ -1,8 +1,10 @@
 <?php
 /**
- * add customizations to the wp admin to hide
- * menu items for users and remove powerful plugin
- * tools
+ * File Name Admin_Customizations_WP.php
+ * @subpackage ProjectName
+ *
+ * @version 1.0
+ * @updated 00.00.00
  **/
 ####################################################################################################
 
@@ -13,10 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Admin_Customizations_WP
- *
- * add customizations to the wp admin to hide
- * menu items for users and remove powerful plugin
- * tools
  **/
 class Admin_Customizations_WP {
 
@@ -36,9 +34,14 @@ class Admin_Customizations_WP {
 
 		if ( is_admin() ) {
 			add_action( 'admin_init', [ $this, 'action__admin_init' ] );
-			// add_action( 'admin_menu', [ $this, 'remove_mene_page' ], 99 );
-			add_action( 'admin_menu', [ $this, 'remove_submenus' ], 199 );
+			add_action( 'admin_menu', [ $this, 'remove_mene_page' ], 99999 );
+			add_action( 'admin_menu', [ $this, 'remove_submenus' ], 9999 );
+
+			add_filter( 'all_plugins', [ $this, 'remove_some_plugins_from_admin_view' ], 9999 );
 		}
+
+		add_filter( 'login_headerurl', [ $this, 'login_headerurl' ] );
+		add_filter( 'login_headertitle', [ $this, 'login_headertitle' ] );
 
 	} // end function __construct
 
@@ -72,6 +75,26 @@ class Admin_Customizations_WP {
 
 
 	/**
+	 * Changing the login page URL
+	 **/
+	function login_headerurl() {
+
+		return home_url();
+
+	} // end function login_headerurl
+
+
+	/**
+	 * Changing the login page URL hover text
+	 **/
+	function login_headertitle() {
+
+		return get_bloginfo( 'title' );
+
+	} // end function login_headertitle
+
+
+	/**
 	 * login_enqueue_scripts
 	 **/
 	function login_enqueue_scripts() {
@@ -99,27 +122,98 @@ class Admin_Customizations_WP {
 
 
 	/**
+	 * remove some plugins from admin view
+	 **/
+	function remove_some_plugins_from_admin_view( $all_plugins ) {
+
+		// print_r($all_plugins); die();
+
+		if (
+			is__user(['rhicks','randy'])
+		) {
+			return $all_plugins;
+		}
+
+		unset( $all_plugins['advanced-custom-fields-pro/acf.php'] );
+		unset( $all_plugins['disable-emails/disable-emails.php'] );
+		unset( $all_plugins['bwp-minify/bwp-minify.php'] );
+
+		return $all_plugins;
+
+	} // end function remove_some_plugins_from_admin_view
+
+
+	/**
 	 * remove_submenus
 	 **/
 	function remove_submenus() {
-		// global $submenu; print_r($submenu);
+		global $submenu; // print_r($submenu);
 
+		remove_submenu_page( 'wpseo_dashboard', 'wpseo_licenses' );
+		remove_submenu_page( 'yst_ga_dashboard', 'yst_ga_extensions' );
+
+		if (
+			is__user(['rhicks','randy'])
+		) {
+			return;
+		}
+
+		// remove_submenu_page( 'options-general.php', 'members-settings' );
+
+
+		// remove customize
+		unset( $submenu['themes.php'][6] );
+		// remove_submenu_page( 'themes.php', 'customize.php' );
+
+		if (
+			is__user(['atiba'])
+		) {
+			return;
+		}
+
+		remove_submenu_page( 'options-general.php', 'akismet-key-config' );
 		remove_submenu_page( 'plugins.php', 'plugin-editor.php' );
 		remove_submenu_page( 'tools.php', 'tools.php' );
 		remove_submenu_page( 'themes.php', 'theme-editor.php' );
-		remove_submenu_page( 'themes.php', 'customize.php?return=%2Fwp-admin%2Foptions-general.php' );
 
-		if ( ! current_user_can('administrator') ) {
-
-			remove_submenu_page( 'options-general.php', 'members-settings' );
-			remove_submenu_page( 'options-general.php', 'duplicatepost' );
-			remove_submenu_page( 'users.php', 'roles' );
-
-		}
-
-		// global $submenu; print_r($submenu);
+		// remove_submenu_page( 'options-general.php', 'options-reading.php' );
+		// remove_submenu_page( 'options-general.php', 'options-discussion.php' );
+		// remove_submenu_page( 'options-general.php', 'options-media.php' );
+		// remove_submenu_page( 'options-general.php', 'options-permalink.php' );
 
 	} // end function remove_submenus
+
+
+	/**
+	 * remove_mene_page
+	 **/
+	function remove_mene_page() {
+
+		if (
+			is__user(['rhicks','randy'])
+		) {
+			return;
+		}
+
+		remove_menu_page( 'bwp_minify_general' );
+		remove_menu_page( 'edit.php?post_type=acf' );
+		remove_menu_page( 'edit.php?post_type=acf-field-group' );
+
+		if (
+			is__user(['atiba'])
+		) {
+			return;
+		}
+
+		remove_menu_page( 'jetpack' );
+		remove_menu_page( 'tools.php' );
+		remove_menu_page( 'plugins.php' );
+		remove_menu_page( 'vc-general' );
+		remove_menu_page( 'wpengine-common' );
+		remove_menu_page( 'wpseo_dashboard' );
+		remove_menu_page( 'avia' );
+
+	} // end function remove_mene_page
 
 
 

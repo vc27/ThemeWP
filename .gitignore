@@ -18,14 +18,12 @@ _wpeprivate
 /index.php
 /license.txt
 /readme.html
-/README.md
 /robots.txt
 /wp-activate.php
 /wp-blog-header.php
 /wp-comments-post.php
 /wp-config-sample.php
 /wp-config.php
-/wp-content
 /wp-cron.php
 /wp-links-opml.php
 /wp-load.php
@@ -53,6 +51,8 @@ _wpeprivate
 /wp-content/mu-plugins/*
 /wp-content/themes/*
 /wp-content/plugins/*
+
+!/wp-content/themes/ThemeWP
 
 # Root specific
 /logs

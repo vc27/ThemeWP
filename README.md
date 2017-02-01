@@ -9,6 +9,11 @@ Specs and tasks
 ChangeLog
 ====================
 
+### 02.01.16 - v-9.2.0
+- update is__user to allow for arrays
+- update admin customization to allow for hiding plugins
+- update core scss
+
 ### 12.01.16 - v-9.1.0
 - update gitignore
 - update sass include structure and file naming
