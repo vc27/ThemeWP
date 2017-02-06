@@ -33,15 +33,14 @@ if ( ! defined('ADDONS_INIT') ) {
 	$ACF_Theme_Options_WP->set( 'users_allowed_to_manage_acf', ['randy'] );
 	$ACF_Theme_Options_WP->init();
 
-	require_once('Yoast_SEO_WP.php');
-	$Yoast_SEO_WP = new Yoast_SEO_WP();
-	$Yoast_SEO_WP->init();
-
+	/**
+	 * general shortcodes
+	 **/
 	require_once('Shortcodes_WP.php');
 	$Shortcodes_WP = new Shortcodes_WP();
 	$Shortcodes_WP->init();
 
-	require_once('Testing_WP.php');
+	// require_once('Testing_WP.php');
 	// new Testing_WP();
 
 	define( 'ADDONS_INIT', true );

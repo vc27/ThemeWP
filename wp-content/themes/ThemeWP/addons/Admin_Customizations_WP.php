@@ -1,10 +1,7 @@
 <?php
 /**
- * File Name Admin_Customizations_WP.php
- * @subpackage ProjectName
- *
- * @version 1.0
- * @updated 00.00.00
+ * @package WordPress
+ * @subpackage ThemeWP
  **/
 ####################################################################################################
 

@@ -24,12 +24,12 @@ function get__widget_area( $name, $args = [] ) {
 		WidgetAreaWP::get_widget_area( $name, $args );
 	}
 
-} // end function get__option
+} // end function get__widget_area
 }
 
 
 /**
- * featured_image__form_select --> Wrapper Function
+ * comments__callback --> Wrapper Function
  *
  * @since 6.9.1
  **/

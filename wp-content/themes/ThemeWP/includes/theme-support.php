@@ -8,7 +8,9 @@
 
 
 /**
- * get__option
+ * get options from the db
+ * currently this is a wrapper function for ACF get field
+ * ACF is currently the prefered tool for adding options
  *
  * @since 3.9.0
  **/
@@ -25,7 +27,7 @@ function get__option( $option ) {
 
 
 /**
- * is__user
+ * check if the current user is within the provided array or string
  **/
 function is__user( $user_login ) {
 	$userdata = wp_get_current_user();
@@ -51,7 +53,7 @@ function is__user( $user_login ) {
 
 
 /**
- * do__comments
+ * check if comments are active, at multiple levels
  **/
 function do__comments() {
 	global $post;

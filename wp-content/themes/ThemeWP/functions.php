@@ -52,8 +52,10 @@ class ThemeFunctions {
 
 
 	/**
-	* initThemeFunctions
-	**/
+	 * initiate theme function on the top level actions
+	 * suggested for hooking into for themes
+	 * Note: There is not theme activation function as nothing is activated
+	 **/
 	function init() {
 
 		add_action( 'after_setup_theme', [ $this, 'action__after_setup_theme' ] );
@@ -75,23 +77,31 @@ class ThemeFunctions {
 
 
 	/**
-	 * after_setup_theme
+	 * Add support and general items that must be added
+	 * before init action but are specific to the theme.
 	 **/
 	function action__after_setup_theme() {
 
+		// add support the thumbnails
 		add_theme_support( 'post-thumbnails' );
+
+		// se the default thumbnail size
 		set_post_thumbnail_size(
 			get_option( 'thumbnail_size_w' ),
 			get_option( 'thumbnail_size_h' ),
 			get_option( 'thumbnail_crop' )
 		);
 
+		// add suppport for feeds
 		add_theme_support( 'automatic-feed-links' );
+
+		// add support for nav menus
 		add_theme_support( 'nav-menus' );
 
 		// Translations can be added to the /languages/ directory.
 		// load_theme_textdomain( 'ThemeFunctions', "$this->template_directory/languages" );
 
+		// add some basic image sizes for featured images
 		add_image_size( 'standard', 300, 300, false );
 		add_image_size( 'medium', 600, 1000, false );
 		add_image_size( 'large', 1000, 2000, false );
@@ -101,44 +111,67 @@ class ThemeFunctions {
 
 
 	/**
-	 * init
+	 * Standard initiate actions and filters.
 	 **/
 	function action__init() {
 
+		// remove comments from the system
 		$this->remove_comments();
-		add_action( 'admin_menu', [ $this, 'remove_menu_pages' ], 99 );
 
+		// remove comments menu pages
+		add_action( 'admin_menu', [ $this, 'remove_comments_menu_pages' ], 99 );
+
+		// allow shortcodes in text widgets
 		add_filter( 'widget_text', 'do_shortcode' );
+
+		// remove some unnecessary items from wp_head
 		remove_action('wp_head', 'wlwmanifest_link');
 		remove_action('wp_head', 'rsd_link');
 		remove_action('wp_head', 'wp_generator');
 
+		// register styles and scripts
+		add_action( 'wp_enqueue_scripts', [ $this, 'register_styles_and_scripts' ], 9 );
+
+		// enqueue scripts
 		add_action( 'wp_enqueue_scripts', [ $this, 'wp_enqueue_scripts' ] );
+
+		// add a filtered localization array
 		add_action( 'wp_enqueue_scripts', [ $this, 'wp_localize_script' ], 9 );
 
+		// add some post classes
 		add_filter( 'post_class', [ $this, 'post_class' ] );
+
+		// reomve the gallery css that comes with wp, this may not be needed anymore
 		add_filter( 'gallery_style', [ $this, 'remove_gallery_css' ] );
 
-		add_action( 'wp_head', [ $this, 'wp_head' ] );
-		add_action( 'wp_footer', [ $this, 'wp_footer' ] );
-		add_action( 'after_body_tag', [ $this, 'after_body_tag' ] );
+		// add wp_head options
+		add_action( 'wp_head', [ $this, 'add_options_to_wp_head' ] );
 
+		// add wp_footer options
+		add_action( 'wp_footer', [ $this, 'add_options_to_wp_footer' ] );
+
+		// add option to after_body_tag
+		add_action( 'after_body_tag', [ $this, 'add_options_to_after_body_tag' ] );
+
+		// clean title format
 		add_filter( 'protected_title_format', [ $this, 'title_format' ] );
 		add_filter( 'private_title_format', [ $this, 'title_format' ] );
 
+		// clean up login just a little
 		add_filter( 'login_headerurl', [ $this, 'login_headerurl' ] );
 		add_filter( 'login_headertitle', [ $this, 'login_headertitle' ] );
 
+		// add some default features to the core theme layout
 		add_action( 'template_redirect', [ $this, 'layout_options' ] );
 
-		$this->register_style_and_scripts();
-
+		// register sidebars
 		$this->register_sidebars( [
 			'Primary Sidebar' => [
 				'desc' => __( 'This is the primary widgetized area.', 'ThemeFunctions' ),
 			]
 		] );
 
+		// register navigation menu locations
 		register_nav_menus( [
 			'primary-menu' => __( 'Primary Menu Navigation', 'ThemeFunctions' ),
 			'footer-menu' => __( 'Footer Menu Navigation', 'ThemeFunctions' )
@@ -155,7 +188,8 @@ class ThemeFunctions {
 
 
 	/**
-	 * remove_comments
+	 * attempt to remove all comments from a simple option
+	 * Note: there may be some customizations that weezle around this, be aware :)
 	 **/
 	function remove_comments() {
 
@@ -176,19 +210,21 @@ class ThemeFunctions {
 
 
 	/**
-	 * remove_menu_pages
+	 * remove comments from wp-admin
 	 **/
-	function remove_menu_pages() {
+	function remove_comments_menu_pages() {
 
 		if ( get__option( '_comment_system_deactivated' ) ) {
 			remove_menu_page( 'edit-comments.php' );
 		}
 
-	} // end remove_menu_pages
+	} // end remove_comments_menu_pages
 
 
 	/**
-	 * wp_localize_script
+	 * add an object to the head html section
+	 * this the best place to put data that needs to be utilized by js
+	 * @uses apply_filters to allow other scripts to modify from elsewhere
 	 **/
 	function wp_localize_script() {
 
@@ -208,7 +244,7 @@ class ThemeFunctions {
 
 
 	/**
-	 * post_class
+	 * add classes for specific css targeting
 	 **/
 	function post_class( $classes ) {
 		global $post;
@@ -223,7 +259,8 @@ class ThemeFunctions {
 
 
 	/**
-	 * remove_gallery_css
+	 * remove the old wp gallery inline csss
+	 * note: this may not be needed anymore
 	 **/
 	function remove_gallery_css( $css ) {
 
@@ -233,9 +270,9 @@ class ThemeFunctions {
 
 
 	/**
-	 * wp_head
+	 * add options to wp_head action
 	 **/
-	function wp_head() {
+	function add_options_to_wp_head() {
 
 		// Favicon
 		$favicon_url = "/favicon.ico";
@@ -249,35 +286,35 @@ class ThemeFunctions {
 			echo "\n<!-- " . __( 'Start Theme Header', 'ThemeFunctions' ) . " -->\n" . get__option( '_head_html' ) . "\n<!-- " . __( 'End Theme Header', 'ThemeFunctions' ) . " -->\n";
 		}
 
-	} // end function wp_head
+	} // end function add_options_to_wp_head
 
 
 	/**
-	 * wp_footer
+	 * add option to wp_footer action
 	 **/
-	function wp_footer() {
+	function add_options_to_wp_footer() {
 
 		if ( get__option( '_footer_html' ) ) {
 			echo "\n<!-- " . __( 'Start Theme Footer', 'ThemeFunctions' ) . " -->\n" . get__option( '_footer_html' ) . "\n<!-- " . __( 'End Theme Footer', 'ThemeFunctions' ) . " -->\n";
 		}
 
-	} // end function wp_footer
+	} // end function add_options_to_wp_footer
 
 
 	/**
-	 * after_body_tag
+	 * add optios to the after_body_tag action
 	 **/
-	function after_body_tag() {
+	function add_options_to_after_body_tag() {
 
 		if ( get__option( '_after_opening_body_tag' ) ) {
 			echo get__option( '_after_opening_body_tag' );
 		}
 
-	} // end function after_body_tag
+	} // end function add_options_to_after_body_tag
 
 
 	/**
-	 * title_format
+	 * clean title format
 	 **/
 	function title_format() {
 
@@ -314,7 +351,7 @@ class ThemeFunctions {
 
 
 	/**
-	 * register_sidebars
+	 * utility for registering sidebars
 	 **/
 	function register_sidebars( $sidebars = [] ) {
 
@@ -348,18 +385,18 @@ class ThemeFunctions {
 
 
 	/**
-	 * register_style_and_scripts
+	 * register styles and scripts
 	 **/
-	function register_style_and_scripts() {
+	function register_styles_and_scripts() {
 
 		wp_register_style( 'style-css', get_stylesheet_directory_uri() . "/css/style.css", [], null );
 		wp_register_script( 'site-scripts-js', get_stylesheet_directory_uri() . "/js/siteScripts.js", [ 'jquery' ], null );
 
-	} // end function register_style_and_scripts
+	} // end function register_styles_and_scripts
 
 
 	/**
-	 * wp_enqueue_scripts
+	 * enqueue scripts
 	 **/
 	function wp_enqueue_scripts() {
 
@@ -374,7 +411,8 @@ class ThemeFunctions {
 
 
 	/**
-	 * layout_options
+	 * add custom functions to layout options utilized
+	 * by this specific theme.
 	 **/
 	function layout_options() {
 

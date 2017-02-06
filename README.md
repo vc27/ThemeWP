@@ -9,6 +9,10 @@ Specs and tasks
 ChangeLog
 ====================
 
+### 02.06.16 - v-9.3.0
+- clean functions.php a little, add descriptions and comments
+- remove unnecessary addon files
+
 ### 02.01.16 - v-9.2.0
 - update is__user to allow for arrays
 - update admin customization to allow for hiding plugins
