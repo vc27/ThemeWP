@@ -9,6 +9,10 @@ Specs and tasks
 ChangeLog
 ====================
 
+### 02.10.16 - v-9.4.0
+- add full width template
+- add template with no header and no footer
+
 ### 02.06.16 - v-9.3.0
 - clean functions.php a little, add descriptions and comments
 - remove unnecessary addon files
