@@ -35,7 +35,6 @@ get_template_part( 'header' );
 				if (
 					is_archive()
 					OR is_home()
-					OR is_front_page()
 					OR is_search()
 				) {
 					the__excerpt( $post, array(

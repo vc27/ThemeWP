@@ -9,6 +9,9 @@ Specs and tasks
 ChangeLog
 ====================
 
+### 02.10.16 - v-9.4.1
+- remove is_front_page on check for excerpts
+
 ### 02.10.16 - v-9.4.0
 - add full width template
 - add template with no header and no footer
