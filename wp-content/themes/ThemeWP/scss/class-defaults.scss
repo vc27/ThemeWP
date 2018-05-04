@@ -31,6 +31,20 @@
 .text-upper {
 	text-transform:uppercase;
 }
+.text-left {
+	text-align:left;
+}
+.text-center {
+	text-align:center;
+}
+.text-right {
+	text-align:right;
+}
+.text-compact {
+	margin:0;
+	padding:0;
+	line-height:18px;
+}
 
 // Images
 .img-wrap {
